@@ -2,5 +2,144 @@
     ViewData["Title"] = "View Tasks";
 }
 
-<h1>View Task Details</h1>
+<h1 class="text-center">View Your Tasks</h1>
+<br/>
+<br/>
 
+@model List<Mission08_Team0201.Models.Task>
+
+<div class="container">
+
+    <div class="row">
+        <!-- Quadrant 1 -->
+        <div class="col-md-6 border p-2">
+            <h2 style="font-size: 16px;">1. Urgent & Important</h2>
+            @foreach (var task in Model.Where(t => t.Quadrant == 1))
+            {
+                <div class="card mb-1" style="font-size: 12px; padding: 5px; margin: 3px; width: 100%; height: 50px;">
+                    <div class="card-body" style="padding: 5px; display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 13px;">@task.TaskName</strong>
+                        <p style="font-size: 11px; margin: 0;">
+                            <span style="background-color: #f5f5dc; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block;">@task.Category.CategoryName</span>
+                        </p>
+                        <span style="font-size: 11px;">Due: @(task.DueDate.HasValue ? task.DueDate.Value.ToShortDateString() : "No Due Date")</span>
+
+                        <div style="display: flex; gap: 5px;">
+                            <form method="post" asp-action="Delete" onsubmit="return confirmDelete()" style="margin: 0;">
+                                <input type="hidden" name="TaskId" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-success btn-sm" style="padding: 2px 6px; font-size: 10px;">✔</button>
+                            </form>
+
+                            <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm" style="padding: 2px 6px; font-size: 10px;">✏</a>
+
+                            <form method="post" asp-action="Delete" onsubmit="return confirmDelete()" style="margin: 0;">
+                                <input type="hidden" name="TaskId" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" style="padding: 2px 6px; font-size: 10px;">❌</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div> 
+
+        <!-- Quadrant 2 -->
+        <div class="col-md-6 border p-2">
+            <h2 style="font-size: 16px;">2. Not Urgent & Important</h2>
+            @foreach (var task in Model.Where(t => t.Quadrant == 2))
+            {
+                <div class="card mb-1" style="font-size: 12px; padding: 5px; margin: 3px; width: 100%; height: 50px;">
+                    <div class="card-body" style="padding: 5px; display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 13px;">@task.TaskName</strong>
+                        <p style="font-size: 11px; margin: 0;">
+                            <span style="background-color: #f5f5dc; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block;">@task.Category.CategoryName</span>
+                        </p>
+                        <span style="font-size: 11px;">Due: @(task.DueDate.HasValue ? task.DueDate.Value.ToShortDateString() : "No Due Date")</span>
+                        
+                        
+                        <div style="display: flex; gap: 5px;">
+                            <form method="post" asp-action="Delete" onsubmit="return confirmDelete()" style="margin: 0;">
+                                <input type="hidden" name="TaskId" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-success btn-sm" style="padding: 2px 6px; font-size: 10px;">✔</button>
+                            </form>
+
+                            <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm" style="padding: 2px 6px; font-size: 10px;">✏</a>
+
+                            <form method="post" asp-action="Delete" onsubmit="return confirmDelete()" style="margin: 0;">
+                                <input type="hidden" name="TaskId" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" style="padding: 2px 6px; font-size: 10px;">❌</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Quadrant 3 -->
+        <div class="col-md-6 border p-2">
+            <h2 style="font-size: 16px;">3. Urgent & Not Important</h2>
+            @foreach (var task in Model.Where(t => t.Quadrant == 3))
+            {
+                <div class="card mb-1" style="font-size: 12px; padding: 5px; margin: 3px; width: 100%; height: 50px;">
+                    <div class="card-body" style="padding: 5px; display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 13px;">@task.TaskName</strong>
+                        <p style="font-size: 11px; margin: 0;">
+                            <span style="background-color: #f5f5dc; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block;">@task.Category.CategoryName</span>
+                        </p>
+                        <span style="font-size: 11px;">Due: @(task.DueDate.HasValue ? task.DueDate.Value.ToShortDateString() : "No Due Date")</span>
+
+                        <div style="display: flex; gap: 5px;">
+                            <form method="post" asp-action="Delete" onsubmit="return confirmDelete()" style="margin: 0;">
+                                <input type="hidden" name="TaskId" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-success btn-sm" style="padding: 2px 6px; font-size: 10px;">✔</button>
+                            </form>
+                            <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm" style="padding: 2px 6px; font-size: 10px;">✏</a>
+
+                            <form method="post" asp-action="Delete" onsubmit="return confirmDelete()" style="margin: 0;">
+                                <input type="hidden" name="TaskId" value="@task.TaskId"/>
+                                <button type="submit" class="btn btn-danger btn-sm" style="padding: 2px 6px; font-size: 10px;">❌</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Quadrant 4 -->
+        <div class="col-md-6 border p-2">
+            <h2 style="font-size: 16px;">4. Not Urgent & Not Important</h2>
+            @foreach (var task in Model.Where(t => t.Quadrant == 4))
+            {
+                <div class="card mb-1" style="font-size: 12px; padding: 5px; margin: 3px; width: 100%; height: 50px;">
+                    <div class="card-body" style="padding: 5px; display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 13px;">@task.TaskName</strong>
+                        <p style="font-size: 11px; margin: 0;">
+                            <span style="background-color: #f5f5dc; padding: 2px 6px; border-radius: 4px; font-weight: bold; display: inline-block;">@task.Category.CategoryName</span>
+                        </p>
+                        <span style="font-size: 11px;">Due: @(task.DueDate.HasValue ? task.DueDate.Value.ToShortDateString() : "No Due Date")</span>
+
+                        <div style="display: flex; gap: 5px;">
+                            <form method="post" asp-action="Delete" onsubmit="return confirmDelete()" style="margin: 0;">
+                                <input type="hidden" name="TaskId" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-success btn-sm" style="padding: 2px 6px; font-size: 10px;">✔</button>
+                            </form>
+                            <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm" style="padding: 2px 6px; font-size: 10px;">✏</a>
+
+                            <form method="post" asp-action="Delete" onsubmit="return confirmDelete()" style="margin: 0;">
+                                <input type="hidden" name="TaskId" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" style="padding: 2px 6px; font-size: 10px;">❌</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this task?");
+    }
+</script>

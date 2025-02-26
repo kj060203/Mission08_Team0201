@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission08_Team0201.Models;
 using Mission08_Team0201.Views.Home;
 using Task = Mission08_Team0201.Models.Task;
@@ -50,7 +51,7 @@ namespace Mission08_Team0201.Controllers
         public IActionResult ViewTask()
         {
             //Linq
-            var tasks = _context.Tasks
+            var tasks = _context.Tasks.Include(t => t.Category)
                 .Where(x => x.Completed == false)
                 .OrderBy(x => x.TaskName).ToList();
         
@@ -91,6 +92,7 @@ namespace Mission08_Team0201.Controllers
             _context.SaveChanges();
             return RedirectToAction("ViewTask");
         }
+        
         
     }
 }
