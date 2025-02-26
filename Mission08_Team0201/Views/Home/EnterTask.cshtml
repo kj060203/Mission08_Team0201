@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@model Task
+
+
+<h1>Add a Movie to the Collection</h1>
+
+<form method="post" asp-action="AddTask">
+    <input type="hidden" asp-for="TaskId"/>
+    <label asp-for="Task">Task</label>
+    <input asp-for="Task" />
+    <br/>
+    <label asp-for="DueDate">Due Date</label>
+    <input asp-for="DueDate" />
+    <br />
+    <label asp-for="Quadrant">Quadrant</label>
+    <input asp-for="Quadrant" />
+    <br />
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Category m in ViewBag.Categories)
+        {
+            <option value="@m.CategoryId">@m.CategoryName</option>
+        }
+    </select>
+    <br />
+    <label asp-for="Completed">Completed</label>
+    <select asp-for="Completed">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+    <br />
+    <button type="submit">Submit</button>
+
+    <div asp-validation-summary="All"></div>
+
+</form>

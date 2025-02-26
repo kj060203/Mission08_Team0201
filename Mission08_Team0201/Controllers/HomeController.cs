@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Mission08_Team0201.Models;
+using Mission08_Team0201.Views.Home;
 
 namespace Mission08_Team0201.Controllers
 {
@@ -18,10 +19,16 @@ namespace Mission08_Team0201.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult EnterTask()
         {
             return View();
         }
+
+        public IActionResult ViewTask()
+        {
+            return View();
+        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
