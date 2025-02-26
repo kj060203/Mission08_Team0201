@@ -60,12 +60,12 @@ namespace Mission08_Team0201.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var record = _context.Tasks
+            var recordToEdit = _context.Tasks
                 .Single(x => x.TaskId == id);
         
             ViewBag.Categories = _context.Categories
                 .OrderBy(x => x.CategoryName).ToList();
-            return View("EnterTask", record);
+            return View("EnterTask", recordToEdit);
         }
 
         [HttpPost]
@@ -78,10 +78,10 @@ namespace Mission08_Team0201.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var record = _context.Tasks
+            var recordToDelete = _context.Tasks
                 .Single(x => x.TaskId == id);
         
-            return View(record);
+            return View(recordToDelete);
         }
 
         [HttpPost]
