@@ -2,26 +2,49 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Mission08_Team0201.Models;
 using Mission08_Team0201.Views.Home;
+using Task = Mission08_Team0201.Models.Task;
 
 namespace Mission08_Team0201.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private Mission08DbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(Mission08DbContext temp)
         {
-            _logger = logger;
+            _context = temp;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-
+        
+        [HttpGet]
         public IActionResult EnterTask()
         {
-            return View();
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName).ToList();
+            return View(new Task());
+        }
+
+        [HttpPost]
+
+        public IActionResult EnterTask(Task task)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Tasks.Add(task); //add record to db
+                _context.SaveChanges(); //save changes
+        
+                return View("Index", task);
+            }
+            else //invalid data
+            {
+                ViewBag.Categories = _context.Categories
+                    .OrderBy(x => x.CategoryName).ToList();
+                return View("EnterTask", task);
+            }
         }
 
         public IActionResult ViewTask()

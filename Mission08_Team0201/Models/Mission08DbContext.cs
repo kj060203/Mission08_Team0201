@@ -10,17 +10,17 @@ namespace Mission08_Team0201.Models
             : base(options) // This ensures proper configuration of the DbContext
         { }
 
-        public DbSet<TaskModel> Tasks { get; set; }
-        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Seed Categories
-            modelBuilder.Entity<CategoryModel>().HasData(
-                new CategoryModel { CategoryId = 1, CategoryName = "Home" },
-                new CategoryModel { CategoryId = 2, CategoryName = "School" },
-                new CategoryModel { CategoryId = 3, CategoryName = "Work" },
-                new CategoryModel { CategoryId = 4, CategoryName = "Church" }
+            modelBuilder.Entity<Category>().HasData(
+                new Category { CategoryId = 1, CategoryName = "Home" },
+                new Category { CategoryId = 2, CategoryName = "School" },
+                new Category { CategoryId = 3, CategoryName = "Work" },
+                new Category { CategoryId = 4, CategoryName = "Church" }
             );
         }
     }

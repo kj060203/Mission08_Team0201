@@ -2,7 +2,7 @@
 
 namespace Mission08_Team0201.Models
 {
-    public class CategoryModel
+    public class Category
     {
             [Key]
             public int CategoryId { get; set; } // Primary Key

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mission08_Team0201.Models
 {
-    public class TaskModel
+    public class Task
     {
             [Key]
             public int TaskId { get; set; } // Primary Key
@@ -21,7 +21,7 @@ namespace Mission08_Team0201.Models
             [ForeignKey("Category")]
             public int CategoryId { get; set; } // Foreign Key to Category Table
 
-            public CategoryModel? Category { get; set; } // Navigation Property
+            public Category? Category { get; set; } // Navigation Property
 
             public bool Completed { get; set; } // True if task is done
         }

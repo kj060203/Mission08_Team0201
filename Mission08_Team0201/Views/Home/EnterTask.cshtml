@@ -1,15 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-@model Task
-
+@model Mission08_Team0201.Models.Task
 
 <h1>Add a Movie to the Collection</h1>
 
-<form method="post" asp-action="AddTask">
+<form method="post" asp-action="EnterTask">
     <input type="hidden" asp-for="TaskId"/>
-    <label asp-for="Task">Task</label>
-    <input asp-for="Task" />
+    <label asp-for="TaskName">Task</label>
+    <input asp-for="TaskName" />
     <br/>
     <label asp-for="DueDate">Due Date</label>
     <input asp-for="DueDate" />
