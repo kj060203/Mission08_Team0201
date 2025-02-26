@@ -57,5 +57,40 @@ namespace Mission08_Team0201.Controllers
             return View(tasks);
         }
         
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var record = _context.Tasks
+                .Single(x => x.TaskId == id);
+        
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName).ToList();
+            return View("EnterTask", record);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Task task)
+        {
+            _context.Update(task);
+            _context.SaveChanges();
+            return RedirectToAction("ViewTask");
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var record = _context.Tasks
+                .Single(x => x.TaskId == id);
+        
+            return View(record);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Task task)
+        {
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
+            return RedirectToAction("ViewTask");
+        }
+        
     }
 }
