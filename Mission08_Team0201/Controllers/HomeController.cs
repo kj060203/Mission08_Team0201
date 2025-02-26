@@ -49,7 +49,12 @@ namespace Mission08_Team0201.Controllers
 
         public IActionResult ViewTask()
         {
-            return View();
+            //Linq
+            var tasks = _context.Tasks
+                .Where(x => x.Completed == false)
+                .OrderBy(x => x.TaskName).ToList();
+        
+            return View(tasks);
         }
         
 
