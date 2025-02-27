@@ -12,6 +12,7 @@ builder.Services.AddDbContext<Mission08DbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("QuadrantConnection"))
 );
 
+builder.Services.AddScoped<ITaskRepository, EFTaskRepository>();
 
 var app = builder.Build();
 
